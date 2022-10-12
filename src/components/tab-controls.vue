@@ -48,10 +48,10 @@ export default {
         (tab) => Number(tab.id) === Number(product.id)
       );
 
-      this.products.forEach(i => i.isActive = false)
-      this.products[tabIndex].isActive = true
-      this.isActive = false
-      
+      this.products.forEach((i) => (i.isActive = false));
+      this.products[tabIndex].isActive = true;
+      this.isActive = false;
+
       this.$emit("tab-change", product);
     },
   },
@@ -64,10 +64,13 @@ export default {
       products.map((product, index) => {
         this.products.push({ ...product, isActive: !index });
       });
-      if(products.length >= 2) {
-        this.tabChange(this.products[1])
+      if (products.length >= 2) {
+        this.tabChange(this.products[1]);
+      } else if (products.length > 0) {
+        this.tabChange(this.products[0]);
       } else {
-        this.tabChange(this.products[0])
+        this.isActive = true;
+        this.$emit("tab-active", {}, this.isActive);
       }
     });
   },
